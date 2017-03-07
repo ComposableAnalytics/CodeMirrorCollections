@@ -114,6 +114,12 @@
     },
 
     update: function(first) {
+      var range = this.cm.findWordAt(this.cm.getCursor());
+      var word = this.cm.getRange(range.anchor, range.head);
+      if (word.charAt(word.length - 1) === '*') {
+        this.close();
+      }
+
       if (this.tick == null) return
       var self = this, myTick = ++this.tick
       fetchHints(this.options.hint, this.cm, this.options, function(data) {
